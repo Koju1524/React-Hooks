@@ -24,6 +24,14 @@ const App = () => {
 
   }
 
+  const deleteAllEvents = e => {
+    e.preventDefault()
+    const result = window.confirm('delete all events??')
+    if (result) dispatch( {type: 'DELETE_ALL_EVENTS'})
+  }
+
+  const unCreatable = title === '' || body === ''
+
   return (
     <div className="container-fluid">
       <h4>Event Form</h4>
@@ -38,8 +46,8 @@ const App = () => {
           <textarea className="form-control" id="FormEvenBody" value={body} onChange={e =>setBody(e.target.value) }/>
         </div>
 
-        <button className="btn btn-primary" onClick={addEvent}>Create Event</button>
-        <button className="btn btn-danger">Delete All Event</button>
+        <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>Create Event</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>Delete All Event</button>
       </form>
 
       <h4>Event Lists</h4>
